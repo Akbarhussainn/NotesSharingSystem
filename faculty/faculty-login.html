@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Faculty Login — Notes Sharing System</title>
+  <!-- adjust path if your css folder is elsewhere -->
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+  <main class="centered-card">
+    <div class="card">
+      <h2>Faculty Login</h2>
+      <p class="muted">Sign in with your college Gmail or upload Faculty ID for manual verification.</p>
+
+      <form id="facultyLoginForm" novalidate>
+        <label for="email">College Email</label>
+        <input id="email" name="email" type="email" placeholder="name@college.edu" required />
+
+        <div class="or-row"><span>or</span></div>
+
+        <label for="idUpload">Upload Faculty ID (PDF/JPG/PNG)</label>
+        <input id="idUpload" name="idUpload" type="file" accept=".pdf,image/*" />
+
+        <div class="help-line">
+          <input id="remember" type="checkbox" />
+          <label for="remember">Remember me on this device</label>
+        </div>
+
+        <button type="submit" class="primary-btn">Continue</button>
+      </form>
+
+      <div id="status" class="status"></div>
+
+      <p class="small muted">
+        Need help? Contact admin at <a href="mailto:admin@college.edu">admin@college.edu</a>
+      </p>
+      <a href="../index.html" class="back-link">← Back to Home</a>
+    </div>
+  </main>
+
+  <script src="../js/script.js"></script>
+  <script>
+    // small page-specific script to handle submission
+    (function () {
+      const form = document.getElementById('facultyLoginForm');
+      const emailInput = document.getElementById('email');
+      const idInput = document.getElementById('idUpload');
+      const status = document.getElementById('status');
+
+      // Replace with your college domain(s)
+      const COLLEGE_DOMAINS = ['college.edu', 'yourcollege.ac.in'];
+
+      function isCollegeEmail(email) {
+        if (!email) return false;
+        const domain = email.split('@')[1] || '';
+        return COLLEGE_DOMAINS.includes(domain.toLowerCase());
+      }
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        status.textContent = '';
+        status.className = 'status';
+
+        const email = emailInput.value.trim();
+        const file = idInput.files[0];
+
+        if (!email && !file) {
+          status.textContent = 'Please provide a college email or upload your Faculty ID.';
+          status.classList.add('error');
+          return;
+        }
+
+        if (email && isCollegeEmail(email)) {
+          // Simulate verified college login
+          status.textContent = 'College email verified. Redirecting to faculty dashboard...';
+          status.classList.add('success');
+
+          // simulate storing session and redirect (replace with real page later)
+          localStorage.setItem('userRole', 'faculty');
+          localStorage.setItem('userEmail', email);
+          setTimeout(() => {
+            window.location.href = 'faculty-dashboard.html'; // create this page later
+          }, 900);
+          return;
+        }
+
+        if (file) {
+          // Simulate manual verification flow
+          status.innerHTML = 'ID received. It will be reviewed by admin. You will be notified after approval.';
+          status.classList.add('info');
+
+          // simulate upload by saving file name to localStorage (for demo)
+          localStorage.setItem('uploadedFacultyID', file.name);
+          return;
+        }
+
+        // If email provided but not college domain, suggest ID upload
+        status.textContent = 'Email is not a college domain. Please upload your Faculty ID for manual verification.';
+        status.classList.add('error');
+      });
+    })();
+  </script>
+</body>
+</html>

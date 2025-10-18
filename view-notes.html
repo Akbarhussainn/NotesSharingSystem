@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>View Notes</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .notes-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      animation: fadeIn 1s ease-in-out;
+      z-index: 2;
+    }
+    .note-card {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 25px;
+      border-radius: 15px;
+      width: 250px;
+      text-align: center;
+      color: white;
+      backdrop-filter: blur(15px);
+      box-shadow: 0 0 20px rgba(255,255,255,0.1);
+      transition: 0.4s;
+    }
+    .note-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px rgba(0,198,255,0.3);
+    }
+    .note-card h3 {
+      color: #00c6ff;
+    }
+    .note-card a, .note-card button {
+      margin-top: 10px;
+      display: inline-block;
+      background: #00c6ff;
+      color: #0f2027;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s;
+      text-decoration: none;
+    }
+    .note-card button:hover, .note-card a:hover {
+      background: white;
+      transform: scale(1.05);
+    }
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 30px;
+      color: #00c6ff;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay"></div>
+  <div class="notes-container">
+    <div class="note-card">
+      <h3>Maths - Calculus</h3>
+      <p>By: Prof. Sharma</p>
+      <a href="#">Download</a>
+      <button>Take Test</button>
+    </div>
+    <div class="note-card">
+      <h3>Computer Networks</h3>
+      <p>By: Prof. Rishi</p>
+      <a href="#">Download</a>
+      <button>Take Test</button>
+    </div>
+    <div class="note-card">
+      <h3>Database Systems</h3>
+      <p>By: Prof. Dalit</p>
+      <a href="#">Download</a>
+      <button>Take Test</button>
+    </div>
+  </div>
+  <a href="../index.html" class="back-link">← Back to Home</a>
+</body>
+</html>

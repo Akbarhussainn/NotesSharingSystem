@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | Notes Sharing System</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #eef2f3, #dfe9f3);
+      color: #222;
+      overflow-y: scroll;
+      scroll-behavior: smooth;
+    }
+
+    header {
+      background: linear-gradient(90deg, #003366, #0059b3);
+      color: white;
+      padding: 25px 0;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 10;
+    }
+
+    header h1 {
+      margin-bottom: 10px;
+      font-size: 28px;
+      letter-spacing: 1px;
+    }
+
+    nav {
+      margin-top: 5px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: 500;
+      padding: 6px 10px;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover,
+    nav a.active {
+      background-color: white;
+      color: #003366;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 160px auto 60px auto; /* enough space from header */
+      padding: 40px 50px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      overflow-y: auto;
+    }
+
+    h2 {
+      color: #003366;
+      border-left: 5px solid #0078D7;
+      padding-left: 12px;
+      margin-bottom: 15px;
+      font-size: 22px;
+    }
+
+    section {
+      margin-bottom: 50px;
+    }
+
+    p {
+      text-align: justify;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    ul li {
+      background: #f0f5ff;
+      margin: 8px 0;
+      padding: 12px 16px;
+      border-radius: 6px;
+      border-left: 4px solid #0078D7;
+      font-size: 16px;
+      transition: transform 0.2s ease, background 0.3s ease;
+    }
+
+    ul li:hover {
+      background: #e6f0ff;
+      transform: translateX(5px);
+    }
+
+    .highlight {
+      color: #0078D7;
+      font-weight: 600;
+    }
+
+    footer {
+      background: linear-gradient(90deg, #003366, #0059b3);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+    }
+
+    @media (max-width: 768px) {
+      main {
+        padding: 25px;
+        margin-top: 140px;
+      }
+      header h1 {
+        font-size: 22px;
+      }
+      nav a {
+        margin: 0 8px;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>About Our Notes Sharing System</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="upload.html">Upload Notes</a>
+      <a href="view-notes.html">View Notes</a>
+      <a href="about.html" class="active">About</a>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h2>📘 Project Overview</h2>
+      <p>
+        The <span class="highlight">Online Notes Sharing System</span> is a web-based platform designed to simplify academic resource sharing.
+        It bridges the gap between faculty and students by allowing verified handwritten notes to be uploaded, reviewed, and shared.
+        This ensures authenticity, encourages collaborative learning, and improves accessibility for all learners.
+      </p>
+    </section>
+
+    <section>
+      <h2>👨‍💻 Our Team</h2>
+      <ul>
+        <li><strong>Akbar</strong> — Team Leader & Fullstack Developer</li>
+        <li><strong>Santanu</strong> — Backend Developer (Upload & Admin Module)</li>
+        <li><strong>Rishi</strong> — Frontend Developer (Student Dashboard & Test UI)</li>
+        <li><strong>Dipankar</strong> — UI/UX Designer & Presentation Coordinator</li>
+      </ul>
+      <p>
+        Each member contributed to a specific module, working together to create a system that combines usability, performance, and security.
+      </p>
+    </section>
+
+    <section>
+      <h2>🎯 Project Objectives</h2>
+      <p>
+        Our goal is to deliver a <span class="highlight">smart and reliable learning platform</span> that ensures students receive authentic study materials and quick self-assessment opportunities.
+        The system demonstrates knowledge of <strong>HTML, CSS, JavaScript, PHP, and Database Management</strong> — bringing all core web development skills together in one cohesive project.
+      </p>
+    </section>
+
+    <section>
+      <h2>🚀 Future Enhancements</h2>
+      <p>
+        We plan to enhance this platform using <span class="highlight">AI-driven automatic test generation</span>, cloud integration for scalability,
+        and a real-time Q&A section between faculty and students.
+        This will make the platform more interactive and beneficial for both learners and educators.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Notes Sharing System | Developed with ❤ by Team Akbar</p>
+  </footer>
+</body>
+</html>

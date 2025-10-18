@@ -1,0 +1,125 @@
+/* ==== General site styles ==== */
+body {
+  font-family: 'Poppins', Arial, sans-serif;
+  background-color: #f3f4f6;
+  margin: 0;
+  padding: 0;
+}
+
+/* ==== Header ==== */
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 15px;
+  text-align: center;
+}
+
+/* ==== Card Center Layout ==== */
+.centered-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  max-width: 400px;
+  width: 90%;
+}
+
+.card h2 {
+  margin-top: 0;
+  color: #222;
+  text-align: center;
+}
+
+.muted {
+  color: #666;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* ==== Form elements ==== */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+label {
+  font-weight: 500;
+}
+
+input[type="email"],
+input[type="file"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+.primary-btn {
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.primary-btn:hover {
+  background-color: #555;
+}
+
+.or-row {
+  text-align: center;
+  color: #888;
+  font-size: 14px;
+}
+
+.help-line {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+}
+
+.back-link {
+  display: block;
+  text-align: center;
+  margin-top: 15px;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+/* ==== Status messages ==== */
+.status {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.status.error {
+  color: #d9534f;
+}
+
+.status.success {
+  color: #28a745;
+}
+
+.status.info {
+  color: #17a2b8;
+}
