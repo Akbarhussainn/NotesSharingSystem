@@ -4,51 +4,209 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Faculty Login — Notes Sharing System</title>
-  <!-- adjust path if your css folder is elsewhere -->
-  <link rel="stylesheet" href="../style.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      overflow: hidden;
+      animation: gradientShift 6s ease infinite alternate;
+    }
+
+    @keyframes gradientShift {
+      0% { background: linear-gradient(135deg, #6a11cb, #2575fc); }
+      100% { background: linear-gradient(135deg, #2575fc, #6a11cb); }
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(15px);
+      border-radius: 20px;
+      padding: 40px 45px;
+      width: 360px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      color: #fff;
+      text-align: center;
+      transform: translateY(0);
+      opacity: 0;
+      animation: fadeSlideIn 0.8s ease forwards;
+    }
+
+    @keyframes fadeSlideIn {
+      0% { transform: translateY(-30px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    h2 {
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .muted {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 25px;
+    }
+
+    form {
+      text-align: left;
+      width: 100%;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 6px;
+      color: #e0e0e0;
+    }
+
+    input[type="email"],
+    input[type="file"] {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      outline: none;
+      margin-bottom: 18px;
+      font-size: 14px;
+      color: #333;
+    }
+
+    input[type="file"] {
+      background: rgba(255, 255, 255, 0.85);
+      cursor: pointer;
+    }
+
+    .or-row {
+      text-align: center;
+      margin: 12px 0;
+      position: relative;
+    }
+
+    .or-row span {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 13px;
+      color: #fff;
+    }
+
+    .help-line {
+      display: flex;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .help-line input[type="checkbox"] {
+      margin-right: 8px;
+      accent-color: #6a11cb;
+    }
+
+    .primary-btn {
+      width: 100%;
+      background: linear-gradient(90deg, #6a11cb, #2575fc);
+      border: none;
+      color: white;
+      font-weight: 600;
+      padding: 12px 0;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .primary-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(37, 117, 252, 0.4);
+    }
+
+    .status {
+      margin-top: 15px;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .status.success { color: #4caf50; }
+    .status.error { color: #ff5252; }
+    .status.info { color: #ffeb3b; }
+
+    .small {
+      margin-top: 25px;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    a:hover { color: #ffeb3b; }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 13px;
+      opacity: 0.8;
+    }
+
+    @media (max-width: 420px) {
+      .card {
+        width: 85%;
+        padding: 30px 25px;
+      }
+    }
+  </style>
 </head>
 <body>
-  <main class="centered-card">
-    <div class="card">
-      <h2>Faculty Login</h2>
-      <p class="muted">Sign in with your college Gmail or upload Faculty ID for manual verification.</p>
+  <div class="card">
+    <h2>Faculty Login</h2>
+    <p class="muted">Sign in with your college Gmail or upload Faculty ID for verification.</p>
 
-      <form id="facultyLoginForm" novalidate>
-        <label for="email">College Email</label>
-        <input id="email" name="email" type="email" placeholder="name@college.edu" required />
+    <form id="facultyLoginForm" novalidate>
+      <label for="email">College Email</label>
+      <input id="email" name="email" type="email" placeholder="name@college.edu" required />
 
-        <div class="or-row"><span>or</span></div>
+      <div class="or-row"><span>OR</span></div>
 
-        <label for="idUpload">Upload Faculty ID (PDF/JPG/PNG)</label>
-        <input id="idUpload" name="idUpload" type="file" accept=".pdf,image/*" />
+      <label for="idUpload">Upload Faculty ID (PDF/JPG/PNG)</label>
+      <input id="idUpload" name="idUpload" type="file" accept=".pdf,image/*" />
 
-        <div class="help-line">
-          <input id="remember" type="checkbox" />
-          <label for="remember">Remember me on this device</label>
-        </div>
+      <div class="help-line">
+        <input id="remember" type="checkbox" />
+        <label for="remember">Remember me on this device</label>
+      </div>
 
-        <button type="submit" class="primary-btn">Continue</button>
-      </form>
+      <button type="submit" class="primary-btn">Continue</button>
+    </form>
 
-      <div id="status" class="status"></div>
+    <div id="status" class="status"></div>
 
-      <p class="small muted">
-        Need help? Contact admin at <a href="mailto:admin@college.edu">admin@college.edu</a>
-      </p>
-      <a href="../index.html" class="back-link">← Back to Home</a>
-    </div>
-  </main>
+    <p class="small">
+      Need help? Contact <a href="mailto:admin@college.edu">admin@college.edu</a>
+    </p>
+    <a href="../index.html" class="back-link">← Back to Home</a>
+  </div>
 
-  <script src="../js/script.js"></script>
   <script>
-    // small page-specific script to handle submission
     (function () {
       const form = document.getElementById('facultyLoginForm');
       const emailInput = document.getElementById('email');
       const idInput = document.getElementById('idUpload');
       const status = document.getElementById('status');
-
-      // Replace with your college domain(s)
       const COLLEGE_DOMAINS = ['college.edu', 'yourcollege.ac.in'];
 
       function isCollegeEmail(email) {
@@ -72,30 +230,23 @@
         }
 
         if (email && isCollegeEmail(email)) {
-          // Simulate verified college login
-          status.textContent = 'College email verified. Redirecting to faculty dashboard...';
+          status.textContent = 'College email verified. Redirecting to Faculty Dashboard...';
           status.classList.add('success');
-
-          // simulate storing session and redirect (replace with real page later)
           localStorage.setItem('userRole', 'faculty');
           localStorage.setItem('userEmail', email);
           setTimeout(() => {
-            window.location.href = 'faculty-dashboard.html'; // create this page later
-          }, 900);
+            window.location.href = 'faculty-dashboard.html';
+          }, 1000);
           return;
         }
 
         if (file) {
-          // Simulate manual verification flow
-          status.innerHTML = 'ID received. It will be reviewed by admin. You will be notified after approval.';
+          status.textContent = 'ID received. It will be reviewed by admin. You will be notified after approval.';
           status.classList.add('info');
-
-          // simulate upload by saving file name to localStorage (for demo)
           localStorage.setItem('uploadedFacultyID', file.name);
           return;
         }
 
-        // If email provided but not college domain, suggest ID upload
         status.textContent = 'Email is not a college domain. Please upload your Faculty ID for manual verification.';
         status.classList.add('error');
       });
