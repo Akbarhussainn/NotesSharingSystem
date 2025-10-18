@@ -201,18 +201,25 @@
     <a href="../index.html" class="back-link">← Back to Home</a>
   </div>
 
+
   <script>
     (function () {
       const form = document.getElementById('facultyLoginForm');
       const emailInput = document.getElementById('email');
       const idInput = document.getElementById('idUpload');
       const status = document.getElementById('status');
-      const COLLEGE_DOMAINS = ['college.edu', 'yourcollege.ac.in'];
 
+      // robust college email check + debug logging
       function isCollegeEmail(email) {
         if (!email) return false;
-        const domain = email.split('@')[1] || '';
-        return COLLEGE_DOMAINS.includes(domain.toLowerCase());
+        // normalize: trim, toLowerCase, remove trailing dots/spaces
+        const normalized = email.trim().toLowerCase().replace(/\s+/g, '');
+        const parts = normalized.split('@');
+        if (parts.length !== 2) return false;
+        const domain = parts[1].replace(/\.+$/, ''); // remove trailing dots like "edu."
+        console.log('isCollegeEmail -> email:', email, 'normalized:', normalized, 'domain:', domain);
+        // accept domains that end with .edu or .ac.in (covers ku.edu, ku.ac.in, etc.)
+        return /(^|\.)((edu$)|(ac\.in$))/.test(domain);
       }
 
       form.addEventListener('submit', function (e) {
@@ -220,7 +227,7 @@
         status.textContent = '';
         status.className = 'status';
 
-        const email = emailInput.value.trim();
+        const email = emailInput.value;
         const file = idInput.files[0];
 
         if (!email && !file) {
@@ -233,7 +240,7 @@
           status.textContent = 'College email verified. Redirecting to Faculty Dashboard...';
           status.classList.add('success');
           localStorage.setItem('userRole', 'faculty');
-          localStorage.setItem('userEmail', email);
+          localStorage.setItem('userEmail', email.trim());
           setTimeout(() => {
             window.location.href = 'faculty-dashboard.html';
           }, 1000);
@@ -247,10 +254,14 @@
           return;
         }
 
-        status.textContent = 'Email is not a college domain. Please upload your Faculty ID for manual verification.';
+        // show what domain failed (helpful while debugging)
+        const parts = (email || '').trim().toLowerCase().split('@');
+        const triedDomain = parts.length === 2 ? parts[1].replace(/\.+$/, '') : '(invalid email)';
+        status.textContent = `Email is not a recognized college domain ("${triedDomain}"). Please upload your Faculty ID for manual verification.`;
         status.classList.add('error');
       });
     })();
   </script>
+
 </body>
 </html>
