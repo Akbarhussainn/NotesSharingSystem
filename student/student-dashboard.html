@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Dashboard | Notes Sharing System</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      background: linear-gradient(to right, #0072ff, #00c6ff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      color: white;
+      opacity: 0;
+      animation: bgFadeIn 1s forwards;
+    }
+
+    /* Background fade-in */
+    @keyframes bgFadeIn {
+      to { opacity: 1; }
+    }
+
+    /* Dashboard pop-up */
+    @keyframes dashboardPop {
+      0% { opacity: 0; transform: translateY(50px) scale(0.95); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .dashboard {
+      background: rgba(0, 0, 0, 0.35);
+      padding: 40px 60px;
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.25);
+      text-align: center;
+      width: 400px;
+      animation: dashboardPop 0.8s ease forwards;
+    }
+
+    .dashboard h1 {
+      margin-bottom: 15px;
+      font-size: 28px;
+      letter-spacing: 1px;
+    }
+
+    .dashboard p {
+      font-size: 16px;
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+
+    .btn-container {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    /* Buttons fade + pop */
+    @keyframes buttonPop {
+      0% { opacity: 0; transform: translateY(15px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .btn {
+      background: white;
+      color: #0072ff;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 12px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      opacity: 0;
+      transform: translateY(15px);
+      animation: buttonPop 0.5s ease forwards;
+    }
+
+    /* Button animation delays */
+    .btn:nth-child(1) { animation-delay: 0.5s; }
+    .btn:nth-child(2) { animation-delay: 0.7s; }
+
+    .btn:hover {
+      background: #0072ff;
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    .logout {
+      margin-top: 30px;
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    .logout a {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <h1>Welcome, Student</h1>
+    <p>Access high-quality verified notes and test your understanding.</p>
+    <div class="btn-container">
+      <!-- Make sure this path is correct relative to this file -->
+      <a href="../view-notes.html" class="btn">📘 View Notes</a>
+      <a href="../attempt-test.html" class="btn">📝 Take Tests</a>
+    </div>
+    <div class="logout">
+      <p>Not you? <a href="student-login.html">Logout</a></p>
+    </div>
+  </div>
+</body>
+</html>
