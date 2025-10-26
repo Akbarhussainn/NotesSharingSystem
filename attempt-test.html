@@ -1,81 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Attempt Test | Notes Sharing System</title>
-  <link rel="stylesheet" href="../css/style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Attempt Test — Notes Sharing System</title>
+  <link rel="stylesheet" href="../style.css">
   <style>
+    :root {
+      --bg: linear-gradient(135deg, #0f2027, #203a43);
+      --card-bg: rgba(255,255,255,0.06);
+      --accent: #00c6ff;
+      --text: #e9f2f7;
+      --radius: 12px;
+    }
+
     body {
-      font-family: "Poppins", sans-serif;
       margin: 0;
-      background: linear-gradient(to right, #0072ff, #00c6ff);
+      min-height: 100vh;
       display: flex;
       justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      color: #333;
-      overflow-x: hidden;
-      opacity: 0;
-      animation: bgFadeIn 1s forwards;
+      align-items: flex-start;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: var(--bg);
+      color: var(--text);
+      padding: 40px 16px;
     }
-
-    @keyframes bgFadeIn { to { opacity: 1; } }
 
     .test-container {
-      background: rgba(255,255,255,0.95);
-      padding: 40px 50px;
-      border-radius: 20px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+      background: var(--card-bg);
+      backdrop-filter: blur(15px);
+      border-radius: var(--radius);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+      padding: 40px 35px;
+      width: 100%;
       max-width: 600px;
-      width: 90%;
-      animation: popUp 0.8s ease forwards;
+      animation: fadeIn 0.8s ease-in-out;
       position: relative;
-    }
-
-    @keyframes popUp {
-      0% { opacity: 0; transform: translateY(50px) scale(0.95); }
-      100% { opacity: 1; transform: translateY(0) scale(1); }
     }
 
     h2 {
       text-align: center;
-      color: #0072ff;
+      color: var(--accent);
       margin-bottom: 25px;
+      font-weight: 600;
     }
 
     .timer {
       position: absolute;
-      top: 20px;
-      right: 20px;
+      top: 18px;
+      right: 24px;
       font-weight: 600;
-      color: #0072ff;
-      font-size: 16px;
+      color: var(--accent);
+      font-size: 15px;
     }
 
     .progress-bar {
-      height: 8px;
-      background: #d0d0d0;
+      height: 6px;
+      background: rgba(255,255,255,0.15);
       border-radius: 4px;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
       overflow: hidden;
     }
 
     .progress {
       height: 100%;
       width: 0%;
-      background: #0072ff;
+      background: var(--accent);
       transition: width 0.4s ease;
     }
 
     .question {
-      font-size: 18px;
-      margin-bottom: 20px;
-      color: #333;
+      font-size: 1rem;
+      margin-bottom: 25px;
+      color: var(--text);
       min-height: 60px;
       opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.4s ease;
+      transform: translateY(10px);
+      transition: all 0.3s ease;
     }
 
     .question.active {
@@ -86,54 +87,78 @@
     .options {
       display: flex;
       flex-direction: column;
-      gap: 15px;
+      gap: 12px;
     }
 
     .option {
-      background: #f0f0f0;
-      padding: 12px 20px;
-      border-radius: 12px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 12px 18px;
+      color: var(--text);
       cursor: pointer;
       transition: all 0.3s ease;
-      border: 1px solid transparent;
     }
 
     .option:hover {
-      background: #0072ff;
-      color: white;
-      border: 1px solid #005bb5;
+      background: var(--accent);
+      color: #082025;
       transform: translateY(-2px);
     }
 
     .option.selected {
-      background: #0072ff;
-      color: white;
-      border: 1px solid #005bb5;
+      background: var(--accent);
+      color: #082025;
+      border-color: #00a0d8;
     }
 
     .btn-next {
-      margin-top: 25px;
-      background: #0072ff;
-      color: white;
+      margin-top: 28px;
+      background: var(--accent);
+      color: #082025;
       font-weight: 600;
       padding: 12px;
       border: none;
       border-radius: 10px;
       cursor: pointer;
       width: 100%;
-      transition: all 0.3s ease;
+      transition: 0.3s ease;
     }
 
     .btn-next:hover {
-      background: #005bb5;
+      background: white;
       transform: translateY(-2px);
     }
 
+    .finish-message {
+      text-align: center;
+      color: var(--accent);
+      font-weight: 600;
+      margin-top: 25px;
+    }
+
+    .back-link {
+      display: inline-block;
+      text-align: center;
+      margin-top: 25px;
+      color: var(--accent);
+      text-decoration: none;
+      width: 100%;
+    }
+
+    .back-link:hover {
+      color: white;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
 <body>
   <div class="test-container">
-    <h2>Sample Test</h2>
+    <h2>Attempt Test</h2>
     <div class="timer" id="timer">10:00</div>
 
     <div class="progress-bar">
@@ -144,31 +169,17 @@
     <div class="options" id="options"></div>
 
     <button class="btn-next" id="nextBtn">Next</button>
+    <div class="finish-message" id="finishMessage" hidden>🎉 Test Completed!</div>
+    <a href="view_notes.html" class="back-link">← Back to View Notes</a>
   </div>
 
   <script>
-    // Sample questions array (can later load from JSON)
     const questions = [
-      {
-        q: "What does HTML stand for?",
-        options: ["Hyper Text Markup Language", "Home Tool Markup Language", "Hyperlinks and Text Markup Language", "Hyper Tool Markup Language"]
-      },
-      {
-        q: "Which tag is used to create a link in HTML?",
-        options: ["<a>", "<link>", "<href>", "<url>"]
-      },
-      {
-        q: "Which HTML attribute specifies an alternate text for an image?",
-        options: ["alt", "src", "title", "caption"]
-      },
-      {
-        q: "Which tag is used for table row?",
-        options: ["<tr>", "<td>", "<th>", "<table>"]
-      },
-      {
-        q: "Which tag is used to define an unordered list?",
-        options: ["<ul>", "<ol>", "<li>", "<list>"]
-      }
+      { q: "What does HTML stand for?", options: ["Hyper Text Markup Language", "Home Tool Markup Language", "Hyperlinks and Text Markup Language", "Hyper Tool Markup Language"] },
+      { q: "Which tag is used to create a link in HTML?", options: ["<a>", "<link>", "<href>", "<url>"] },
+      { q: "Which HTML attribute specifies an alternate text for an image?", options: ["alt", "src", "title", "caption"] },
+      { q: "Which tag is used for table row?", options: ["<tr>", "<td>", "<th>", "<table>"] },
+      { q: "Which tag is used to define an unordered list?", options: ["<ul>", "<ol>", "<li>", "<list>"] }
     ];
 
     let current = 0;
@@ -176,12 +187,14 @@
     const questionEl = document.getElementById('question');
     const optionsEl = document.getElementById('options');
     const progress = document.getElementById('progress');
+    const nextBtn = document.getElementById('nextBtn');
+    const finishMessage = document.getElementById('finishMessage');
 
     function loadQuestion(index) {
       const q = questions[index];
       questionEl.innerText = `${index + 1}. ${q.q}`;
       questionEl.classList.remove('active');
-      setTimeout(() => questionEl.classList.add('active'), 50); // smooth fade in
+      setTimeout(() => questionEl.classList.add('active'), 50);
 
       optionsEl.innerHTML = '';
       q.options.forEach(option => {
@@ -196,49 +209,47 @@
         optionsEl.appendChild(div);
       });
 
-      // update progress
       progress.style.width = `${(index / questions.length) * 100}%`;
       selectedOption = null;
     }
 
     loadQuestion(current);
 
-    document.getElementById('nextBtn').addEventListener('click', () => {
-      if(!selectedOption) {
+    nextBtn.addEventListener('click', () => {
+      if (!selectedOption) {
         alert("Please select an option before proceeding!");
         return;
       }
       current++;
-      if(current < questions.length) {
+      if (current < questions.length) {
         loadQuestion(current);
       } else {
-        // Finish test
-        questionEl.innerText = "Test Completed!";
+        questionEl.innerText = "";
         optionsEl.style.display = 'none';
-        document.getElementById('nextBtn').style.display = 'none';
+        nextBtn.style.display = 'none';
         progress.style.width = '100%';
+        finishMessage.hidden = false;
       }
     });
 
-    // Timer countdown
-    let timerEl = document.getElementById('timer');
-    let time = 10 * 60; // 10 minutes in seconds
+    // Timer logic
+    const timerEl = document.getElementById('timer');
+    let time = 10 * 60;
 
     function updateTimer() {
       let minutes = Math.floor(time / 60);
       let seconds = time % 60;
-      timerEl.innerText = `${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
-      if(time > 0) {
+      timerEl.innerText = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      if (time > 0) {
         time--;
         setTimeout(updateTimer, 1000);
       } else {
         alert("Time's up!");
-        document.getElementById('nextBtn').click();
+        nextBtn.click();
       }
     }
 
     updateTimer();
-
   </script>
 </body>
 </html>
