@@ -1,33 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Notes Sharing System</title>
-  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Poppins", sans-serif; }
+
+    body {
+      background: linear-gradient(135deg, #0a192f, #112d4e);
+      color: white;
+    }
+
+    /* Navbar */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 60px;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(8px);
+      position: sticky;
+      top: 0;
+    }
+
+    nav h1 { font-size: 1.5rem; font-weight: 700; color: #60a5fa; }
+    nav ul { list-style: none; display: flex; gap: 25px; }
+    nav ul li a {
+      text-decoration: none;
+      color: #f1f5f9;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+    nav ul li a:hover { color: #60a5fa; }
+
+    /* Hero Section */
+    .hero {
+      height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      color: #cbd5e1;
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      max-width: 600px;
+    }
+
+    .buttons a {
+      margin: 10px;
+      padding: 12px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: white;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .student { background: #2563eb; }
+    .faculty { background: #059669; }
+    .admin { background: #b91c1c; }
+    .about { background: #475569; }
+
+    .buttons a:hover { opacity: 0.9; transform: translateY(-2px); }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 15px;
+      font-size: 0.9rem;
+      background: rgba(255,255,255,0.05);
+      color: #cbd5e1;
+    }
+  </style>
 </head>
 <body>
-  <div class="overlay"></div>
 
-  <div class="container">
-    <h1 class="title">Notes Sharing System</h1>
-    <p class="subtitle">Read, Upload, and Learn Smarter</p>
+  <nav>
+    <h1>Notes Sharing System</h1>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="student/student-login.html">Login</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
 
-    <h2>Welcome to Notes Sharing System</h2>
-    <p>Choose your role to continue</p>
-
+  <section class="hero">
+    <h1>Share, Access & Learn Together</h1>
+    <p>A simple, secure, and smart platform for students and faculty to share verified handwritten notes and AI-powered quizzes.</p>
     <div class="buttons">
-      <a href="student/student-login.html" class="btn student">Student</a>
-      <a href="faculty/faculty-login.html" class="btn faculty">Faculty</a>
-      <a href="#" class="btn admin">Admin</a>
+      <a href="student/student-login.html" class="student">Student</a>
+      <a href="faculty/faculty-login.html" class="faculty">Faculty</a>
+      <a href="#" class="admin">Admin</a>
+      <a href="about.html" class="about">About</a>
     </div>
+  </section>
 
-    <!-- About Button -->
-    <div class="about-btn">
-      <a href="about.html" class="btn about">About Project</a>
-    </div>
-  </div>
+  <footer>
+    © 2025 Notes Sharing System | Designed by Team Akbar
+  </footer>
 
-  <script src="script.js"></script>
 </body>
 </html>
