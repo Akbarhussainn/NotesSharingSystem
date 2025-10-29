@@ -42,7 +42,9 @@
     }
 
     .sidebar nav a {
-      display: block;
+      display: flex;
+      align-items: center;
+      gap: 10px;
       color: #cbd5e1;
       text-decoration: none;
       padding: 12px 15px;
@@ -56,6 +58,16 @@
     .sidebar nav a.active {
       background: rgba(255,255,255,0.15);
       color: #93c5fd;
+    }
+
+    .sidebar nav a.locked {
+      color: #64748b;
+      cursor: not-allowed;
+    }
+
+    .sidebar nav a.locked:hover {
+      background: none;
+      color: #64748b;
     }
 
     .logout-btn {
@@ -246,7 +258,7 @@
       box-shadow: 0 6px 20px rgba(0,0,0,0.3);
       cursor: pointer;
       transition: 0.3s;
-      display: none; /* hidden for students */
+      display: none;
     }
 
     .upload-btn:hover {
@@ -277,9 +289,10 @@
   <aside class="sidebar">
     <div>
       <div class="logo">NSS</div>
-      <nav>
+      <nav id="sidebarNav">
         <a href="#" class="active">📘 <span>View Notes</span></a>
-        <a href="../faculty/upload-notes.html">📤 <span>Upload Notes</span></a>
+        <!-- Upload Notes link dynamically changes based on role -->
+        <a id="uploadLink">📤 <span>Upload Notes</span></a>
         <a href="../attempt-test.html">📝 <span>Take Tests</span></a>
       </nav>
     </div>
@@ -346,54 +359,89 @@
   <!-- Upload (+) -->
   <button class="upload-btn" id="uploadBtn" title="Upload Notes">+</button>
 
-  <script>
-    const role = localStorage.getItem("userRole") || "student";
-    const email = localStorage.getItem("userEmail") || "user@example.com";
-    const username = email.split("@")[0];
-    document.getElementById("username").textContent = username.charAt(0).toUpperCase() + username.slice(1);
-    document.getElementById("roleBadge").textContent = role.charAt(0).toUpperCase() + role.slice(1);
+ <script type="module">
+  // Import Firebase
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
+  import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
 
-    // Only faculty can see Upload (+)
-    if (role === "faculty") {
-      document.getElementById("uploadBtn").style.display = "block";
-    }
+  // Your Firebase config
+  const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_PROJECT_ID.appspot.com",
+    messagingSenderId: "YOUR_SENDER_ID",
+    appId: "YOUR_APP_ID"
+  };
 
-    // Filter and search
-    const searchInput = document.getElementById('searchInput');
-    const filterSelect = document.getElementById('filterSelect');
-    const notesGrid = document.getElementById('notesGrid');
-    const cards = Array.from(notesGrid.querySelectorAll('.note-card'));
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
 
-    function filterNotes() {
-      const search = searchInput.value.toLowerCase().trim();
-      const filter = filterSelect.value.toLowerCase();
-      let visibleCount = 0;
+  // User role handling
+  const role = localStorage.getItem("userRole")?.toLowerCase() || "student";
+  const email = localStorage.getItem("userEmail") || "user@example.com";
+  const username = email.split("@")[0];
 
-      cards.forEach(card => {
-        const title = card.dataset.title.toLowerCase();
-        const subject = card.dataset.subject.toLowerCase();
-        const matchesSearch = title.includes(search);
-        const matchesFilter = !filter || subject === filter;
-        const visible = matchesSearch && matchesFilter;
-        card.hidden = !visible;
-        if (visible) visibleCount++;
-      });
-    }
+  document.getElementById("username").textContent =
+    username.charAt(0).toUpperCase() + username.slice(1);
+  document.getElementById("roleBadge").textContent =
+    role.charAt(0).toUpperCase() + role.slice(1);
 
-    searchInput.addEventListener('input', filterNotes);
-    filterSelect.addEventListener('change', filterNotes);
+  const uploadLink = document.getElementById("uploadLink");
+  const uploadBtn = document.getElementById("uploadBtn");
 
-    // Upload redirect
-    document.getElementById('uploadBtn').addEventListener('click', () => {
-      window.location.href = '../faculty/upload-notes.html';
+  // Role-based UI
+  if (role === "faculty") {
+    uploadLink.href = "../faculty/upload-notes.html";
+    uploadBtn.style.display = "block";
+  } else {
+    uploadLink.classList.add("locked");
+    uploadLink.innerHTML = "🔒 <span>Upload Notes</span>";
+    uploadLink.addEventListener("click", e => {
+      e.preventDefault();
+      alert("Only faculty members can upload notes.");
     });
+  }
 
-    // Logout
-    function logout() {
+  // Filter + Search
+  const searchInput = document.getElementById('searchInput');
+  const filterSelect = document.getElementById('filterSelect');
+  const notesGrid = document.getElementById('notesGrid');
+  const cards = Array.from(notesGrid.querySelectorAll('.note-card'));
+
+  function filterNotes() {
+    const search = searchInput.value.toLowerCase().trim();
+    const filter = filterSelect.value.toLowerCase();
+    cards.forEach(card => {
+      const title = card.dataset.title.toLowerCase();
+      const subject = card.dataset.subject.toLowerCase();
+      const visible = (!filter || subject === filter) && title.includes(search);
+      card.hidden = !visible;
+    });
+  }
+
+  searchInput.addEventListener('input', filterNotes);
+  filterSelect.addEventListener('change', filterNotes);
+
+  // Upload (+) redirect
+  uploadBtn.addEventListener('click', () => {
+    window.location.href = '../faculty/upload-notes.html';
+  });
+
+  // ✅ Firebase Logout function
+  window.logout = async function () {
+    try {
+      await signOut(auth);
       localStorage.clear();
       sessionStorage.setItem("justLoggedOut", "true");
-      window.location.href = "../faculty/faculty-login.html";
+      window.location.href = "../index.html";
+    } catch (error) {
+      console.error("Logout failed:", error.message);
+      alert("Error logging out. Please try again.");
     }
-  </script>
+  };
+</script>
+
 </body>
 </html>
