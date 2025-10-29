@@ -242,6 +242,10 @@
         alert("Login failed: " + error.message);
       }
     });
+    localStorage.setItem("userRole", "faculty");
+    localStorage.setItem("userEmail", user.email);
+    window.location.href = "../dashboard/dashboard.html"; // adjust the path if different
+
 
     // Redirect logic (avoid redirecting after logout)
     auth.onAuthStateChanged((user) => {

@@ -258,6 +258,10 @@
         window.location.href = "student-login.html";
       }
     });
+    localStorage.setItem("userRole", "student");
+    localStorage.setItem("userEmail", user.email);
+    window.location.href = "../dashboard/dashboard.html";
+
   </script>
 </body>
 </html>
