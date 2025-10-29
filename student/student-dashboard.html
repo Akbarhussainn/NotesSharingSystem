@@ -1,56 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Student Dashboard | Notes Sharing System</title>
-  <link rel="stylesheet" href="../css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+
   <style>
+    * {margin: 0; padding: 0; box-sizing: border-box; font-family: "Poppins", sans-serif;}
     body {
-      font-family: "Poppins", sans-serif;
-      margin: 0;
-      background: linear-gradient(to right, #0072ff, #00c6ff);
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0a192f, #112d4e);
+      color: white;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Navbar */
+    nav {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      padding: 15px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #93c5fd;
+      letter-spacing: 1px;
+    }
+    .nav-links a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-left: 25px;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+    .nav-links a:hover { color: #93c5fd; }
+
+    /* Dashboard Section */
+    .dashboard {
+      flex: 1;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      overflow: hidden;
-      color: white;
-      opacity: 0;
-      animation: bgFadeIn 1s forwards;
-    }
-
-    /* Background fade-in */
-    @keyframes bgFadeIn {
-      to { opacity: 1; }
-    }
-
-    /* Dashboard pop-up */
-    @keyframes dashboardPop {
-      0% { opacity: 0; transform: translateY(50px) scale(0.95); }
-      100% { opacity: 1; transform: translateY(0) scale(1); }
-    }
-
-    .dashboard {
-      background: rgba(0, 0, 0, 0.35);
-      padding: 40px 60px;
-      border-radius: 20px;
-      box-shadow: 0 0 30px rgba(0, 0, 0, 0.25);
       text-align: center;
-      width: 400px;
-      animation: dashboardPop 0.8s ease forwards;
+      padding: 60px 20px;
     }
-
-    .dashboard h1 {
-      margin-bottom: 15px;
-      font-size: 28px;
-      letter-spacing: 1px;
+    .dashboard-box {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 50px 60px;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      animation: fadeIn 0.8s ease;
+      width: 90%;
+      max-width: 500px;
     }
-
-    .dashboard p {
-      font-size: 16px;
-      margin-bottom: 30px;
-      opacity: 0.9;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    h1 {
+      font-size: 2rem;
+      color: #93c5fd;
+      margin-bottom: 10px;
+    }
+    p {
+      color: #cbd5e1;
+      margin-bottom: 25px;
+    }
+    .user-info {
+      font-size: 0.9rem;
+      opacity: 0.8;
+      margin-bottom: 25px;
     }
 
     .btn-container {
@@ -58,62 +86,128 @@
       flex-direction: column;
       gap: 15px;
     }
-
-    /* Buttons fade + pop */
-    @keyframes buttonPop {
-      0% { opacity: 0; transform: translateY(15px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-
     .btn {
       background: white;
-      color: #0072ff;
+      color: #1e3a8a;
       font-weight: 600;
       text-decoration: none;
       padding: 12px;
       border-radius: 8px;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      opacity: 0;
-      transform: translateY(15px);
-      animation: buttonPop 0.5s ease forwards;
+      transition: 0.3s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
-
-    /* Button animation delays */
-    .btn:nth-child(1) { animation-delay: 0.5s; }
-    .btn:nth-child(2) { animation-delay: 0.7s; }
-
     .btn:hover {
-      background: #0072ff;
+      background: #2563eb;
       color: white;
       transform: translateY(-3px);
     }
 
+    /* Logout Button */
     .logout {
-      margin-top: 30px;
-      font-size: 14px;
-      opacity: 0.8;
+      margin-top: 35px;
+    }
+    .logout button {
+      background: transparent;
+      border: 1px solid white;
+      color: white;
+      padding: 10px 25px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+    .logout button:hover {
+      background: white;
+      color: #0a192f;
     }
 
-    .logout a {
-      color: #fff;
-      text-decoration: underline;
+    /* Footer */
+    footer {
+      background: rgba(255, 255, 255, 0.05);
+      text-align: center;
+      padding: 15px;
+      font-size: 0.85rem;
+      color: #cbd5e1;
     }
-
   </style>
 </head>
+
 <body>
-  <div class="dashboard">
-    <h1>Welcome, Student</h1>
-    <p>Access high-quality verified notes and test your understanding.</p>
-    <div class="btn-container">
-      <!-- Make sure this path is correct relative to this file -->
-      <a href="../view-notes.html" class="btn">📘 View Notes</a>
-      <a href="../attempt-test.html" class="btn">📝 Take Tests</a>
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">Notes Sharing System</div>
+    <div class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="../about.html">About</a>
+      <a href="#" id="logoutBtn">Logout</a>
     </div>
-    <div class="logout">
-      <p>Not you? <a href="student-login.html">Logout</a></p>
+  </nav>
+
+  <!-- Dashboard Section -->
+  <section class="dashboard">
+    <div class="dashboard-box">
+      <h1>Welcome, <span id="userName">Student</span> 👋</h1>
+      <p>Access high-quality verified notes and test your understanding.</p>
+      <div class="user-info" id="userEmail"></div>
+
+      <div class="btn-container">
+        <a href="../view-notes.html" class="btn">📘 View Notes</a>
+        <a href="../attempt-test.html" class="btn">📝 Take Tests</a>
+      </div>
+
+      <div class="logout">
+        <button id="logoutButton">Logout</button>
+      </div>
     </div>
-  </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    © 2025 Notes Sharing System | Built with ❤️ by Students
+  </footer>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+
+  <script>
+    // ✅ Firebase Config (same as your login page)
+    const firebaseConfig = {
+      apiKey: "AIzaSyDxCMujfhbHMhLUXLWFOtWP2AyK67J_IKk",
+      authDomain: "notessharing-144fe.firebaseapp.com",
+      projectId: "notessharing-144fe",
+      storageBucket: "notessharing-144fe.appspot.com",
+      messagingSenderId: "373418867033",
+      appId: "1:373418867033:web:d226a1cc0e0be2dc00f448",
+      measurementId: "G-FR81J4N085"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    // ✅ Check if user is logged in
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        document.getElementById("userEmail").textContent = "Logged in as: " + user.email;
+        const username = user.email.split('@')[0];
+        document.getElementById("userName").textContent = username.charAt(0).toUpperCase() + username.slice(1);
+      } else {
+        window.location.href = "student-login.html";
+      }
+    });
+
+    // ✅ Logout logic (Navbar + Button)
+    const logoutHandler = () => {
+      auth.signOut()
+        .then(() => {
+          alert("Logged out successfully!");
+          window.location.href = "student-login.html";
+        })
+        .catch((error) => alert("Error logging out: " + error.message));
+    };
+
+    document.getElementById("logoutBtn").addEventListener("click", logoutHandler);
+    document.getElementById("logoutButton").addEventListener("click", logoutHandler);
+  </script>
 </body>
 </html>

@@ -3,171 +3,269 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Upload Notes — Notes Sharing System</title>
-  <link rel="stylesheet" href="../style.css">
+  <title>Upload Notes | Notes Sharing System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+
   <style>
-    :root {
-      --bg: linear-gradient(135deg, #0f2027, #203a43);
-      --card-bg: rgba(255,255,255,0.06);
-      --accent: #00c6ff;
-      --text: #e9f2f7;
-      --radius: 12px;
-      --max-width: 600px;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Poppins", sans-serif; }
 
     body {
-      margin: 0;
       min-height: 100vh;
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: #f1f5f9;
       display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background: var(--bg);
-      color: var(--text);
-      padding: 40px 16px;
+      flex-direction: column;
+      align-items: center;
     }
 
-    .page {
+    /* Navbar */
+    nav {
       width: 100%;
-      max-width: var(--max-width);
-      background: var(--card-bg);
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(10px);
+      padding: 15px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .logo {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #93c5fd;
+    }
+    .nav-links a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-left: 25px;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+    .nav-links a:hover { color: #93c5fd; }
+
+    /* Container */
+    .container {
+      width: 100%;
+      max-width: 550px;
+      margin-top: 70px;
+      background: rgba(255,255,255,0.1);
       backdrop-filter: blur(12px);
-      border-radius: var(--radius);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+      border-radius: 16px;
       padding: 40px 30px;
-      animation: fadeIn 0.8s ease-in-out;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+      text-align: center;
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     h1 {
-      font-size: 1.4rem;
+      font-size: 1.8rem;
       font-weight: 600;
-      color: var(--accent);
-      margin-bottom: 20px;
-      text-align: center;
+      color: #fff;
+      margin-bottom: 25px;
     }
 
     form {
       display: flex;
       flex-direction: column;
-      gap: 15px;
-      margin-top: 20px;
+      gap: 18px;
+      text-align: left;
     }
 
     label {
-      font-size: 0.9rem;
+      font-weight: 500;
+      font-size: 0.95rem;
       color: rgba(255,255,255,0.85);
-      text-align: left;
     }
 
     input[type="text"],
     input[type="file"] {
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 8px;
-      padding: 12px;
-      color: var(--text);
-      font-size: 0.95rem;
       width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      font-size: 0.95rem;
       outline: none;
       transition: 0.25s;
     }
 
     input[type="text"]:focus,
     input[type="file"]:focus {
-      border-color: var(--accent);
-      background: rgba(255,255,255,0.15);
+      background: rgba(255, 255, 255, 0.25);
+      border: 1px solid #93c5fd;
     }
 
     button {
-      background: var(--accent);
+      background: #fff;
+      color: #1e3a8a;
+      font-weight: 600;
       border: none;
       border-radius: 8px;
-      color: #082025;
-      padding: 12px 20px;
-      font-weight: 600;
+      padding: 12px;
       cursor: pointer;
       transition: all 0.3s ease;
+      margin-top: 10px;
     }
 
     button:hover {
-      background: white;
-      transform: scale(1.05);
-    }
-
-    .success-message {
-      text-align: center;
-      background: rgba(0,198,255,0.15);
-      color: var(--accent);
-      padding: 10px;
-      border-radius: 8px;
-      margin-top: 10px;
-      display: none;
+      background: #2563eb;
+      color: white;
+      transform: translateY(-2px);
     }
 
     .back-link {
       display: inline-block;
       margin-top: 25px;
-      color: var(--accent);
+      color: #93c5fd;
       text-decoration: none;
       font-weight: 500;
-      text-align: center;
-      width: 100%;
       transition: 0.3s;
     }
 
     .back-link:hover {
       color: white;
+      text-decoration: underline;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(15px); }
-      to { opacity: 1; transform: translateY(0); }
+    /* Popup */
+    .popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+    }
+    .popup-content {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      padding: 30px 40px;
+      text-align: center;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+      animation: popIn 0.3s ease;
+      max-width: 400px;
+      color: #e2e8f0;
+    }
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .popup-content h2 {
+      color: #93c5fd;
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+    .popup-content p {
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+    .popup-content button {
+      background: #93c5fd;
+      color: #1e3a8a;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .popup-content button:hover {
+      background: #fff;
+    }
+
+    footer {
+      background: rgba(255,255,255,0.05);
+      text-align: center;
+      padding: 15px;
+      font-size: 0.85rem;
+      color: #cbd5e1;
+      margin-top: 60px;
+      width: 100%;
     }
   </style>
 </head>
 <body>
-  <div class="page">
+
+  <nav>
+    <div class="logo">Notes Sharing System</div>
+    <div class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="../about.html">About</a>
+    </div>
+  </nav>
+
+  <div class="container">
     <h1>Upload Notes</h1>
     <form id="uploadForm">
       <div>
         <label for="title">Title</label>
-        <input type="text" id="title" placeholder="Enter note title" required>
+        <input type="text" id="title" placeholder="Enter note title" required />
       </div>
       <div>
         <label for="subject">Subject</label>
-        <input type="text" id="subject" placeholder="Enter subject name" required>
+        <input type="text" id="subject" placeholder="Enter subject name" required />
       </div>
       <div>
         <label for="file">Upload File</label>
-        <input type="file" id="file" required>
+        <input type="file" id="file" required />
       </div>
       <button type="submit">Upload</button>
-      <div class="success-message" id="successMessage">Note uploaded successfully!</div>
     </form>
 
     <a href="../view-notes.html" class="back-link">← Back to View Notes</a>
   </div>
 
+  <!-- Popup -->
+  <div class="popup" id="popup">
+    <div class="popup-content">
+      <h2>Note Submitted!</h2>
+      <p>Thank you for uploading your notes.  
+      Our team will review your submission shortly.  
+      You’ll be notified once it’s approved and published.</p>
+      <button id="okBtn">OK</button>
+    </div>
+  </div>
+
+  <footer>© 2025 Notes Sharing System | Faculty Portal</footer>
+
   <script>
     const form = document.getElementById('uploadForm');
-    const successMessage = document.getElementById('successMessage');
+    const popup = document.getElementById('popup');
+    const okBtn = document.getElementById('okBtn');
 
-    form.addEventListener('submit', function(e) {
+    form.addEventListener('submit', function (e) {
       e.preventDefault();
 
-      // Store uploaded note details in localStorage for demo purpose
+      // Simulate upload & admin review system (demo)
       const title = document.getElementById('title').value;
       const subject = document.getElementById('subject').value;
 
-      const notes = JSON.parse(localStorage.getItem('notesData')) || [];
-      notes.push({ title, subject, author: "You" });
-      localStorage.setItem('notesData', JSON.stringify(notes));
+      const notes = JSON.parse(localStorage.getItem('pendingNotes')) || [];
+      notes.push({ title, subject, author: "You", status: "Pending Approval" });
+      localStorage.setItem('pendingNotes', JSON.stringify(notes));
 
-      // Show success message then redirect
-      successMessage.style.display = 'block';
-      setTimeout(() => {
-        window.location.href = 'view-notes.html';
-      }, 1200);
+      // Show popup instead of alert
+      popup.style.display = 'flex';
+    });
+
+    okBtn.addEventListener('click', function () {
+      popup.style.display = 'none';
+      window.location.href = '../view-notes.html';
     });
   </script>
 </body>

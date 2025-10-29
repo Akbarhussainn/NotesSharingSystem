@@ -3,265 +3,253 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Faculty Login — Notes Sharing System</title>
+  <title>Faculty Login | Notes Sharing System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Poppins", sans-serif;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Poppins", sans-serif; }
     body {
       min-height: 100vh;
       display: flex;
+      flex-direction: column;
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: #fff;
+    }
+
+    nav {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      padding: 15px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo { font-size: 1.4rem; font-weight: 700; color: #93c5fd; }
+    .nav-links a {
+      color: #cbd5e1; text-decoration: none; margin-left: 25px; font-weight: 500;
+      transition: 0.3s;
+    }
+    .nav-links a:hover { color: #93c5fd; }
+
+    .container {
+      flex: 1;
+      display: flex;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(135deg, #6a11cb, #2575fc);
-      overflow: hidden;
-      animation: gradientShift 6s ease infinite alternate;
+      padding: 40px 20px;
     }
-
-    @keyframes gradientShift {
-      0% { background: linear-gradient(135deg, #6a11cb, #2575fc); }
-      100% { background: linear-gradient(135deg, #2575fc, #6a11cb); }
-    }
-
     .card {
-      background: rgba(255, 255, 255, 0.12);
-      backdrop-filter: blur(15px);
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
       border-radius: 20px;
-      padding: 40px 45px;
-      width: 360px;
+      padding: 40px;
+      width: 380px;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-      color: #fff;
       text-align: center;
-      transform: translateY(0);
-      opacity: 0;
-      animation: fadeSlideIn 0.8s ease forwards;
+      animation: fadeIn 0.8s ease;
     }
+    @keyframes fadeIn { from {opacity: 0; transform: translateY(20px);} to {opacity: 1; transform: translateY(0);} }
 
-    @keyframes fadeSlideIn {
-      0% { transform: translateY(-30px); opacity: 0; }
-      100% { transform: translateY(0); opacity: 1; }
-    }
+    h2 { font-size: 28px; font-weight: 600; color: #93c5fd; margin-bottom: 8px; }
+    .muted { font-size: 14px; color: rgba(255, 255, 255, 0.8); margin-bottom: 25px; }
 
-    h2 {
-      font-size: 28px;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-
-    .muted {
-      font-size: 14px;
-      color: rgba(255, 255, 255, 0.8);
-      margin-bottom: 25px;
-    }
-
-    form {
-      text-align: left;
+    input {
       width: 100%;
-    }
-
-    label {
-      display: block;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: none;
+      border-radius: 8px;
+      outline: none;
+      background: rgba(255,255,255,0.9);
+      color: #333;
       font-size: 14px;
-      margin-bottom: 6px;
-      color: #e0e0e0;
     }
 
-    input[type="email"],
-    input[type="file"] {
+    button {
       width: 100%;
       padding: 12px;
       border: none;
       border-radius: 8px;
-      outline: none;
-      margin-bottom: 18px;
-      font-size: 14px;
-      color: #333;
-    }
-
-    input[type="file"] {
-      background: rgba(255, 255, 255, 0.85);
-      cursor: pointer;
-    }
-
-    .or-row {
-      text-align: center;
-      margin: 12px 0;
-      position: relative;
-    }
-
-    .or-row span {
-      background: rgba(255, 255, 255, 0.15);
-      padding: 5px 15px;
-      border-radius: 20px;
-      font-size: 13px;
-      color: #fff;
-    }
-
-    .help-line {
-      display: flex;
-      align-items: center;
-      margin-bottom: 18px;
-    }
-
-    .help-line input[type="checkbox"] {
-      margin-right: 8px;
-      accent-color: #6a11cb;
-    }
-
-    .primary-btn {
-      width: 100%;
-      background: linear-gradient(90deg, #6a11cb, #2575fc);
-      border: none;
+      background: #2563eb;
       color: white;
       font-weight: 600;
-      padding: 12px 0;
-      border-radius: 8px;
       cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: 0.3s;
     }
+    button:hover { background: #1e40af; }
 
-    .primary-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(37, 117, 252, 0.4);
+    .google-btn {
+      background: white;
+      color: #1e3a8a;
+      font-weight: 600;
+      margin-top: 10px;
     }
-
     .status {
       margin-top: 15px;
       font-size: 14px;
       text-align: center;
     }
-
     .status.success { color: #4caf50; }
     .status.error { color: #ff5252; }
-    .status.info { color: #ffeb3b; }
 
-    .small {
-      margin-top: 25px;
-      font-size: 13px;
-      color: rgba(255, 255, 255, 0.75);
+    .toggle-text {
+      font-size: 0.9rem;
+      margin-top: 15px;
+      color: #93c5fd;
+      cursor: pointer;
     }
+    .toggle-text:hover { text-decoration: underline; }
 
-    a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s ease;
-    }
-
-    a:hover { color: #ffeb3b; }
-
-    .back-link {
-      display: inline-block;
-      margin-top: 10px;
-      font-size: 13px;
-      opacity: 0.8;
-    }
-
-    @media (max-width: 420px) {
-      .card {
-        width: 85%;
-        padding: 30px 25px;
-      }
+    footer {
+      background: rgba(255,255,255,0.05);
+      text-align: center;
+      padding: 15px;
+      font-size: 0.85rem;
+      color: #cbd5e1;
     }
   </style>
 </head>
 <body>
-  <div class="card">
-    <h2>Faculty Login</h2>
-    <p class="muted">Sign in with your college Gmail or upload Faculty ID for verification.</p>
 
-    <form id="facultyLoginForm" novalidate>
-      <label for="email">College Email</label>
-      <input id="email" name="email" type="email" placeholder="name@college.edu" required />
+  <nav>
+    <div class="logo">Notes Sharing System</div>
+    <div class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="../about.html">About</a>
+    </div>
+  </nav>
 
-      <div class="or-row"><span>OR</span></div>
+  <div class="container">
+    <div class="card">
+      <h2 id="formTitle">Faculty Login</h2>
+      <p class="muted" id="formDesc">Sign in using your official university email only.</p>
 
-      <label for="idUpload">Upload Faculty ID (PDF/JPG/PNG)</label>
-      <input id="idUpload" name="idUpload" type="file" accept=".pdf,image/*" />
+      <form id="authForm">
+        <input type="email" id="email" placeholder="name@college.edu" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button type="submit" id="submitBtn">Login</button>
+        <button type="button" class="google-btn" id="googleLogin">Sign in with Google</button>
+      </form>
 
-      <div class="help-line">
-        <input id="remember" type="checkbox" />
-        <label for="remember">Remember me on this device</label>
-      </div>
-
-      <button type="submit" class="primary-btn">Continue</button>
-    </form>
-
-    <div id="status" class="status"></div>
-
-    <p class="small">
-      Need help? Contact <a href="mailto:admin@college.edu">admin@college.edu</a>
-    </p>
-    <a href="../index.html" class="back-link">← Back to Home</a>
+      <p class="toggle-text" id="toggleText">New user? Register now</p>
+      <div id="status" class="status"></div>
+    </div>
   </div>
 
+  <footer>
+    © 2025 Notes Sharing System | Faculty Portal
+  </footer>
+
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
 
   <script>
-    (function () {
-      const form = document.getElementById('facultyLoginForm');
-      const emailInput = document.getElementById('email');
-      const idInput = document.getElementById('idUpload');
-      const status = document.getElementById('status');
+    const firebaseConfig = {
+      apiKey: "AIzaSyDxCMujfhbHMhLUXLWFOtWP2AyK67J_IKk",
+      authDomain: "notessharing-144fe.firebaseapp.com",
+      projectId: "notessharing-144fe",
+      storageBucket: "notessharing-144fe.appspot.com",
+      messagingSenderId: "373418867033",
+      appId: "1:373418867033:web:d226a1cc0e0be2dc00f448",
+      measurementId: "G-FR81J4N085"
+    };
 
-      // robust college email check + debug logging
-      function isCollegeEmail(email) {
-        if (!email) return false;
-        // normalize: trim, toLowerCase, remove trailing dots/spaces
-        const normalized = email.trim().toLowerCase().replace(/\s+/g, '');
-        const parts = normalized.split('@');
-        if (parts.length !== 2) return false;
-        const domain = parts[1].replace(/\.+$/, ''); // remove trailing dots like "edu."
-        console.log('isCollegeEmail -> email:', email, 'normalized:', normalized, 'domain:', domain);
-        // accept domains that end with .edu or .ac.in (covers ku.edu, ku.ac.in, etc.)
-        return /(^|\.)((edu$)|(ac\.in$))/.test(domain);
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    const formTitle = document.getElementById("formTitle");
+    const formDesc = document.getElementById("formDesc");
+    const submitBtn = document.getElementById("submitBtn");
+    const toggleText = document.getElementById("toggleText");
+    const status = document.getElementById("status");
+    let isLogin = true;
+
+    // Toggle login/signup
+    toggleText.addEventListener("click", () => {
+      isLogin = !isLogin;
+      if (isLogin) {
+        formTitle.textContent = "Faculty Login";
+        formDesc.textContent = "Sign in using your official university email only.";
+        submitBtn.textContent = "Login";
+        toggleText.textContent = "New user? Register now";
+      } else {
+        formTitle.textContent = "Faculty Sign Up";
+        formDesc.textContent = "Register using your university email to access faculty dashboard.";
+        submitBtn.textContent = "Sign Up";
+        toggleText.textContent = "Already have an account? Login here";
+      }
+    });
+
+    // University email restriction
+    function isUniversityEmail(email) {
+      const domain = email.split("@")[1] || "";
+      return domain.endsWith(".edu") || domain.endsWith(".ac.in");
+    }
+
+    // Handle Login/Signup
+    document.getElementById("authForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      status.textContent = "";
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      if (!isUniversityEmail(email)) {
+        status.textContent = "Please use a valid university email (e.g., name@college.edu or name@university.ac.in).";
+        status.className = "status error";
+        return;
       }
 
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        status.textContent = '';
-        status.className = 'status';
-
-        const email = emailInput.value;
-        const file = idInput.files[0];
-
-        if (!email && !file) {
-          status.textContent = 'Please provide a college email or upload your Faculty ID.';
-          status.classList.add('error');
-          return;
+      try {
+        if (isLogin) {
+          await auth.signInWithEmailAndPassword(email, password);
+          status.textContent = "Login successful! Redirecting...";
+          status.className = "status success";
+          sessionStorage.removeItem("justLoggedOut"); // Clear logout flag
+          setTimeout(() => window.location.href = "faculty-dashboard.html", 1000);
+        } else {
+          await auth.createUserWithEmailAndPassword(email, password);
+          status.textContent = "Account created successfully! Redirecting...";
+          status.className = "status success";
+          sessionStorage.removeItem("justLoggedOut"); // Clear logout flag
+          setTimeout(() => window.location.href = "faculty-dashboard.html", 1000);
         }
+      } catch (error) {
+        status.textContent = error.message;
+        status.className = "status error";
+      }
+    });
 
-        if (email && isCollegeEmail(email)) {
-          status.textContent = 'College email verified. Redirecting to Faculty Dashboard...';
-          status.classList.add('success');
-          localStorage.setItem('userRole', 'faculty');
-          localStorage.setItem('userEmail', email.trim());
-          setTimeout(() => {
-            window.location.href = 'faculty-dashboard.html';
-          }, 1000);
-          return;
+    // Google Sign-In with email check
+    document.getElementById("googleLogin").addEventListener("click", async () => {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      try {
+        const result = await auth.signInWithPopup(provider);
+        const email = result.user.email;
+
+        if (isUniversityEmail(email)) {
+          alert("Signed in successfully with university email!");
+          sessionStorage.removeItem("justLoggedOut");
+          window.location.href = "faculty-dashboard.html";
+        } else {
+          await auth.signOut();
+          sessionStorage.setItem("justLoggedOut", "true");
+          alert("Access denied. Only university emails are allowed.");
+          window.location.reload();
         }
+      } catch (error) {
+        console.error(error);
+        alert("Login failed: " + error.message);
+      }
+    });
 
-        if (file) {
-          status.textContent = 'ID received. It will be reviewed by admin. You will be notified after approval.';
-          status.classList.add('info');
-          localStorage.setItem('uploadedFacultyID', file.name);
-          return;
-        }
-
-        // show what domain failed (helpful while debugging)
-        const parts = (email || '').trim().toLowerCase().split('@');
-        const triedDomain = parts.length === 2 ? parts[1].replace(/\.+$/, '') : '(invalid email)';
-        status.textContent = `Email is not a recognized college domain ("${triedDomain}"). Please upload your Faculty ID for manual verification.`;
-        status.classList.add('error');
-      });
-    })();
+    // Redirect logic (avoid redirecting after logout)
+    auth.onAuthStateChanged((user) => {
+      const comingFromLogout = sessionStorage.getItem("justLoggedOut");
+      if (user && !comingFromLogout) {
+        window.location.href = "faculty-dashboard.html";
+      }
+    });
   </script>
-
 </body>
 </html>
